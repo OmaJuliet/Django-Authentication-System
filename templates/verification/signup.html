@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="A django authentication travel tour website. Frontend user interface built using html and tailwindcss " >
+    <meta name="author" content="Juliet Ofoegbu" >
+    <meta name="keywords" content="Frontend development, backend development, web development, HTML, CSS, Tailwindcss, Python, Django, User Authentication" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scale=1.0" />
+    <title>Login Form </title>
+    <!--font awesome icons-->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+  </head>
+  <style>
+    /* Google Fonts - Poppins */
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+    body {
+      background-image: url("moonlight.jpg");
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+
+    .container {
+      height: 100vh;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      column-gap: 30px;
+      box-shadow: 0 20px 10px 0 rgba(0, 0, 0, 0.2);
+    }
+    .form {
+      position: absolute;
+      max-width: 430px;
+      width: 100%;
+      padding: 30px;
+      border-radius: 6px;
+      background: #fff;
+    }
+    .form.signup {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .forms.show-signup .form.signup {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .forms.show-signup .form.login {
+      opacity: 0;
+      pointer-events: none;
+    }
+    header {
+      font-size: 28px;
+      font-weight: 600;
+      color: #232836;
+      text-align: center;
+      font-family: "Roboto Slab", serif;
+    }
+    form {
+      margin-top: 30px;
+    }
+    .form .field {
+      position: relative;
+      height: 50px;
+      width: 100%;
+      margin-top: 20px;
+      border-radius: 6px;
+    }
+    .field input,
+    .field button {
+      height: 100%;
+      width: 100%;
+      border: none;
+      font-size: 16px;
+      font-weight: 400;
+      border-radius: 6px;
+    }
+
+    .field input {
+      outline: none;
+      padding: 0 15px;
+      border: 1px solid#CACACA;
+    }
+    .field input:focus {
+      border-bottom-width: 2px;
+    }
+    .eye-icon {
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%);
+      font-size: 18px;
+      color: #8b8b8b;
+      cursor: pointer;
+      padding: 5px;
+    }
+    .field button {
+      color: #fff;
+      background-color: #0171d3;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .field button:hover {
+      background-color: white;
+      color: #0171d3;
+      border: 2px solid #0171d3;
+      font-size: 18px;
+    }
+    .form-link {
+      text-align: center;
+      margin-top: 10px;
+    }
+    .form-link span,
+    .form-link a {
+      font-size: 14px;
+      font-weight: 400;
+      color: #232836;
+    }
+    .form a {
+      color: #0171d3;
+      text-decoration: none;
+    }
+
+    /* .line {
+      position: relative;
+      height: 1px;
+      width: 100%;
+      margin: 36px 0;
+      background-color: #d4d4d4;
+    }
+    .line::before {
+      content: "Or";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #fff;
+      color: #8b8b8b;
+      padding: 0 15px;
+    } */
+    /* .media-options a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    a.facebook {
+      color: #fff;
+      background-color: #0171d3;
+    }
+    a.facebook .facebook-icon {
+      height: 28px;
+      width: 28px;
+      color: #0171d3;
+      font-size: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #fff;
+    }
+    .facebook-icon,
+    img.google-img {
+      position: absolute;
+      top: 50%;
+      left: 15px;
+      transform: translateY(-50%);
+    }
+    img.google-img {
+      height: 20px;
+      width: 20px;
+      object-fit: cover;
+    }
+    a.google {
+      border: 1px solid #cacaca;
+    }
+    a.google span {
+      font-weight: 500;
+      opacity: 0.6;
+      color: #232836;
+    }
+    #google {
+      background-color: white;
+      color: black;
+      border: 2px solid #0171d3;
+      font-size: 17px;
+      font-weight: 500;
+    }
+    #google:hover {
+      background-color: #0171d3;
+      color: white;
+    } */
+
+    @media screen and (max-width: 400px) {
+      .form {
+        padding: 20px 10px;
+      }
+    }
+  </style>
+  <body>
+    <section class="container forms">
+      <div class="form login">
+        <div class="form-content">
+          <header>Sign up</header>
+          <form action="/signup" method="post">
+            {% csrf_token %}
+            <div class="field input-field">
+              <input type="text" name="username" id="username" placeholder="Create your username" class="input" required/>
+            </div>
+
+            <div class="field input-field">
+              <input type="text" name="fname" id="fname" placeholder="Enter your first name" class="input" required/>
+            </div>
+
+            <div class="field input-field">
+              <input type="text" name="lname" id="lname" placeholder="Enter your last name" class="input" required/>
+            </div>
+
+            <div class="field input-field">
+              <input type="text" name="email" id="email" placeholder="Enter your email address" class="input" required/>
+            </div>
+
+            <div class="field input-field">
+              <input type="password" name="password1" id="password1" placeholder="Create password" class="input" required/>
+              <i class="fa fa-eye-slash eye-icon"></i>
+            </div>
+
+            <div class="field input-field">
+              <input type="password" name="password2" id="password2" placeholder="Confirm password" class="password" required/>
+              <i class="fa fa-eye-slash eye-icon"></i>
+            </div>
+
+            <div class="form-link">
+              <a href="#" class="forgot-pass">Forgot password?</a>
+            </div>
+
+            <div class="field button-field">
+              <button type="submit">Sign up</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- <div class="line"></div> -->
+
+        <!-- <div class="media-options">
+          <a href="https://www.facebook.com/" class="field facebook">
+            <i class="fab fa-facebook-f facebook-icon"></i>
+            <span>Sign up with Facebook</span>
+          </a>
+        </div>
+
+        <div class="media-options">
+          <a href="https://www.google.com/" class="field facebook" id="google">
+            <i class="fab fa-google-plus-g facebook-icon"></i>
+            <span>Sign up with Google</span>
+          </a>
+        </div> -->
+      </div>
+
+    </section>
+
+    <!-- JavaScript -->
+    <script>
+      const forms = document.querySelector(".forms"),
+        pwShowHide = document.querySelectorAll(".eye-icon"),
+        links = document.querySelectorAll(".link");
+
+      pwShowHide.forEach((eyeIcon) => {
+        eyeIcon.addEventListener("click", () => {
+          let pwFields =
+            eyeIcon.parentElement.parentElement.querySelectorAll(".password");
+
+          pwFields.forEach((password) => {
+            if (password.type === "password") {
+              password.type = "text";
+              eyeIcon.classList.replace("fa fa-eye-slash", "fa fa-eye");
+              return;
+            }
+            password.type = "password";
+            eyeIcon.classList.replace("fa fa-eye", "fa fa-eye-slash");
+          });
+        });
+      });
+
+    </script>
+  </body>
+</html>
+

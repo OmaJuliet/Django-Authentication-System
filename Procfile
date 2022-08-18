@@ -1,0 +1,1 @@
+web gunicorn loginsys.wsgi:application --log-file -

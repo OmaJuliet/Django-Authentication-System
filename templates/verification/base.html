@@ -1,0 +1,92 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Julie's Django Authentication Travel Tour Website</title>
+
+    <!-- Tailwindcss link-->
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet" />
+
+    <!-- Font awesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+ 
+</head>
+<body>
+
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show block justify-center text-center text-xl" role="alert">
+        <strong class="text-xl">Message: </strong> {{ message }}
+       
+    </div>
+    {% endfor %}
+
+
+     <header class="text-gray-600 body-font">
+      {% if user.is_authenticated %}
+            <div class="block justify-center text-center">
+                <h2 class="text-xl">Hello {{ fname }}</h2>
+                <h3 class="text-xl">You are successfully logged in</h3>
+            </div>  <!--remove from here to the if user.isauthenticated-->
+        <!-- {% endif %} -->
+      <div class="container mx-auto flex flex-wrap p-5 flex-row md:flex-row items-center justify-between">
+        <h1 class="text-blue-500 text-2xl font-semibold">OmaTour</h1>
+
+
+
+        <div class="flex justify-center text-center">
+          <div class="block">
+            <!-- {% if user.is_authenticated %}
+            <div class="block justify-center text-center">
+                <h2 class="text-xl">Hello {{ fname }}</h2>
+                <h3 class="text-xl">You are successfully logged in</h3>
+            </div> -->
+            <!-- <h2 class="text-center mb-2">Hello {{ fname }}</h2>
+            <h3 class="text-center mb-4">You are successfully logged in</h3> -->
+            <button type="submit" class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg"><a href="/signout">Sign out</a></button>
+        </div>
+
+        {% else %}
+        <h1 class="text-blue-500 text-2xl font-semibold">Oma_Tour</h1>
+
+        <!-- <nav class="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center cursor-pointer">
+          <a class="mr-5 hover:text-gray-900">First Link</a>
+          <a class="mr-5 hover:text-gray-900">Second Link</a>
+          <a class="mr-5 hover:text-gray-900">Third Link</a>
+          <a class="mr-5 hover:text-gray-900">Fourth Link</a>
+        </nav> Remove from here to up above to the a tag that's below the else statement -->
+        <button type="submit" class="inline-flex text-white items-center bg-indigo-500 border-0 py-1 px-3 focus:outline-none hover:bg-indigo-600 rounded text-base mt-4 md:mt-0"><a href="/signin">Sign in</a>
+        </button>
+        <button type="submit" class="inline-flex text-white items-center bg-indigo-500 border-0 py-1 px-3 focus:outline-none hover:bg-indigo-600 rounded text-base mt-4 md:mt-0"><a href="/signup">Sign up</a>
+        </button>
+        {% endif %}
+      </div>
+    </header>
+
+    <div data-aos="fade-up-right" data-aos-delay="50" data-aos-duration="2000" class="container flex flex-col items-center px-5 py-24 mx-auto md:flex-row">
+        <!-- Hero Content -->
+        <div class="flex flex-col items-center text-center mb-16 md:items-start md:text-left lg:flex-grow md:mb-0 md:w-1/2 lg:pr-24 md:pr-16">
+        <h1 class="sm:text-4xl text-2xl mb-4 font-bold capitalize">Take a tour
+            <br class="lg:inline-block">round the world.
+        </h1>
+        <p class="mb-8 leading-relaxed">Provding touring services to tourists at affordable rates. It was founded in the year 2010 and has its headquarter in <strong>Lorem.</strong> Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus, dolorum eligendi! Nam labore beatae aliquid. Placeat quibusdam eveniet fuga porro!</p>
+        </div>
+        
+        <!--Hero Image -->
+        <div class="w-5/6 lg:max-w-lg lg:w-full md:w-1/2">
+        <img data-aos="fade-up-left" data-aos-delay="50" data-aos-duration="2000" class="object-center object-cover rounded" alt="hero-image" src="{% static 'img/tour1.jpg' %}">
+        </div>
+
+    </div>
+
+    <!-- to show only limited amount of info before user log in or sign up -->
+    {% block content %}
+    {% endblock content %}
+
+
+</body>
+</html>
