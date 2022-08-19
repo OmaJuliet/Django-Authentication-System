@@ -1,1 +1,1 @@
-web gunicorn loginsys.wsgi:application --log-file -
+web gunicorn weatherapp.wsgi:application --log-file -
